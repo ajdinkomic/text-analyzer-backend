@@ -26,11 +26,11 @@ public class TextAnalyzerTest {
                 UUID.randomUUID().toString(),
                 userInput,
                 analysisResult,
-                2729800L
+                0.2729
         );
 
         assertNotNull(textAnalyzer);
-        assertEquals(2729800L, textAnalyzer.analysisDuration(), "Analysis duration is incorrect!");
+        assertEquals(0.2729, textAnalyzer.analysisDuration(), "Analysis duration is incorrect!");
         assertTrue(textAnalyzer.getClass().isRecord());
         assertEquals(4, textAnalyzer.getClass().getRecordComponents().length);
     }

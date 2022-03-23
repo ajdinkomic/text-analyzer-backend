@@ -5,6 +5,8 @@ import dev.ajdinkomic.textanalyzer.model.TextAnalyzer;
 import dev.ajdinkomic.textanalyzer.model.UserInput;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -31,7 +33,7 @@ public class TextAnalyzerRepository {
         }
 
         Long timerEnd = System.nanoTime();
-        Long duration = (timerEnd - timerStart);
+        Double duration = roundToFour((double) (timerEnd - timerStart) / 1000000);
 
         return new TextAnalyzer(
                 UUID.randomUUID().toString(),
@@ -39,5 +41,12 @@ public class TextAnalyzerRepository {
                 analysisResult,
                 duration
         );
+    }
+
+    private static double roundToFour(double doubleValue) {
+        // Using BigDecimal(String) constructor for preventing issues with inexact values
+        BigDecimal bigDecimalValue = new BigDecimal(Double.toString(doubleValue));
+        bigDecimalValue = bigDecimalValue.setScale(4, RoundingMode.HALF_UP);
+        return bigDecimalValue.doubleValue();
     }
 }

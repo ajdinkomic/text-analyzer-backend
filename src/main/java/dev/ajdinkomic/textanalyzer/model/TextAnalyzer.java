@@ -8,6 +8,6 @@ public record TextAnalyzer(
         @NotNull
         UserInput userInput,
         HashMap<Character, Integer> analysisResult,
-        Long analysisDuration
+        Double analysisDuration
 ) {
 }
