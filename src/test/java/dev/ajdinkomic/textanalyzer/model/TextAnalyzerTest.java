@@ -3,6 +3,7 @@ package dev.ajdinkomic.textanalyzer.model;
 import dev.ajdinkomic.textanalyzer.enumeration.AnalysisParameterEnum;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -26,7 +27,7 @@ public class TextAnalyzerTest {
                 UUID.randomUUID().toString(),
                 userInput,
                 analysisResult,
-                0.2729
+                BigDecimal.valueOf(0.2729)
         );
 
         assertNotNull(textAnalyzer);

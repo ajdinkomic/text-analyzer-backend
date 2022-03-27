@@ -1,6 +1,7 @@
 package dev.ajdinkomic.textanalyzer.model;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 public record TextAnalyzer(
@@ -8,6 +9,6 @@ public record TextAnalyzer(
         @NotNull
         UserInput userInput,
         HashMap<Character, Integer> analysisResult,
-        Double analysisDuration
+        BigDecimal analysisDuration
 ) {
 }
