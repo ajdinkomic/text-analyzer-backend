@@ -15,7 +15,7 @@ class TextAnalyzerRepositoryTest {
     private TextAnalyzerRepository repository = new TextAnalyzerRepository();
 
     @Test
-    void shouldAnalyzeVowels() {
+    void shouldAnalyzeForVowels() {
         UserInput userInput = new UserInput(
                 "Random sentence to be analyzed.!\"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł",
                 AnalysisParameterEnum.VOWELS
@@ -34,7 +34,7 @@ class TextAnalyzerRepositoryTest {
     }
 
     @Test
-    void shouldAnalyzeConsonants() {
+    void shouldAnalyzeForConsonants() {
         UserInput userInput = new UserInput(
                 "Random sentence to be analyzed.!\"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł",
                 AnalysisParameterEnum.CONSONANTS
@@ -61,7 +61,7 @@ class TextAnalyzerRepositoryTest {
     }
 
     @Test
-    void shouldAnalyzeIncorrectParameter() {
+    void shouldAnalyzeForIncorrectParameter() {
         UserInput userInput = new UserInput(
                 "Random sentence to be analyzed.!\"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł",
                 AnalysisParameterEnum.NONE
@@ -72,7 +72,7 @@ class TextAnalyzerRepositoryTest {
     }
 
     @Test
-    void shouldAnalyzeNullText() {
+    void shouldAnalyzeNullTextForVowels() {
         UserInput userInput = new UserInput(
                 null,
                 AnalysisParameterEnum.VOWELS
@@ -83,9 +83,53 @@ class TextAnalyzerRepositoryTest {
     }
 
     @Test
-    void shouldAnalyzeBlankText() {
+    void shouldAnalyzeNullTextForConsonants() {
+        UserInput userInput = new UserInput(
+                null,
+                AnalysisParameterEnum.CONSONANTS
+        );
+
+        TextAnalyzer actualTextAnalyzer = repository.analyzeText(userInput);
+        assertNull(actualTextAnalyzer);
+    }
+
+    @Test
+    void shouldAnalyzeBlankTextForVowels() {
         UserInput userInput = new UserInput(
                 "  ",
+                AnalysisParameterEnum.VOWELS
+        );
+
+        TextAnalyzer actualTextAnalyzer = repository.analyzeText(userInput);
+        assertNull(actualTextAnalyzer);
+    }
+
+    @Test
+    void shouldAnalyzeBlankTextForConsonants() {
+        UserInput userInput = new UserInput(
+                "  ",
+                AnalysisParameterEnum.CONSONANTS
+        );
+
+        TextAnalyzer actualTextAnalyzer = repository.analyzeText(userInput);
+        assertNull(actualTextAnalyzer);
+    }
+
+    @Test
+    void shouldAnalyzeOnlyNonLettersForVowels() {
+        UserInput userInput = new UserInput(
+                ".!\"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł",
+                AnalysisParameterEnum.VOWELS
+        );
+
+        TextAnalyzer actualTextAnalyzer = repository.analyzeText(userInput);
+        assertNull(actualTextAnalyzer);
+    }
+
+    @Test
+    void shouldAnalyzeOnlyNonLettersForConsonants() {
+        UserInput userInput = new UserInput(
+                ".!\"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł",
                 AnalysisParameterEnum.VOWELS
         );
 
