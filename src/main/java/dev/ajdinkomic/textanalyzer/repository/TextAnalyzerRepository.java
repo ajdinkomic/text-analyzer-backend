@@ -14,6 +14,12 @@ import java.util.UUID;
 public class TextAnalyzerRepository {
 
     public TextAnalyzer analyzeText(UserInput userInput) {
+        // Return null if text or parameter is incorrect
+        if (userInput.text() == null || userInput.text().isBlank() ||
+                (userInput.parameter() != AnalysisParameterEnum.VOWELS && userInput.parameter() != AnalysisParameterEnum.CONSONANTS)) {
+            return null;
+        }
+
         // Start timer
         long timerStart = System.nanoTime();
 
