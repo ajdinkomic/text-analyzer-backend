@@ -14,7 +14,7 @@ import java.util.UUID;
 public class TextAnalyzerRepository {
 
     public TextAnalyzer analyzeText(UserInput userInput) {
-        // Start the timer
+        // Start timer
         long timerStart = System.nanoTime();
 
         // Transform text to lower case and replace all non-letter characters with empty string
@@ -35,11 +35,11 @@ public class TextAnalyzerRepository {
             analysisResult.put(currentChar, analysisResult.getOrDefault(currentChar, 0) + 1);
         }
 
-        // End the timer and calculate the time elapsed
+        // End timer and calculate time elapsed
         long timerEnd = System.nanoTime();
         long timeElapsed = timerEnd - timerStart;
 
-        // Convert the time elapsed to milliseconds and round to three decimal places
+        // Convert time elapsed to milliseconds and round to three decimal places
         BigDecimal analysisDuration = Helper.roundToThreeDecimalPlaces(timeElapsed);
 
         return new TextAnalyzer(
