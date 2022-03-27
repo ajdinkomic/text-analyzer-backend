@@ -13,12 +13,19 @@ import java.util.UUID;
 @Repository
 public class TextAnalyzerRepository {
 
+    private static double roundToFour(double doubleValue) {
+        // Using BigDecimal(String) constructor for preventing issues with inexact values
+        BigDecimal bigDecimalValue = new BigDecimal(Double.toString(doubleValue));
+        bigDecimalValue = bigDecimalValue.setScale(4, RoundingMode.HALF_UP);
+        return bigDecimalValue.doubleValue();
+    }
+
     public TextAnalyzer analyzeText(UserInput userInput) {
-        Long timerStart = System.nanoTime();
+        long timerStart = System.nanoTime();
         HashMap<Character, Integer> analysisResult = new HashMap<>();
 
         // Transform text to lower case and replace all non-letter characters with empty string
-        String text = userInput.text().toLowerCase().replaceAll("[^a-zA-Z]+", "");
+        String text = userInput.text().toLowerCase().replaceAll("[^a-z]+", "");
 
         if (userInput.parameter().equals(AnalysisParameterEnum.VOWELS)) {
             // Remove all consonants
@@ -28,11 +35,11 @@ public class TextAnalyzerRepository {
             text = text.replaceAll("[aeiou]+", "");
         }
 
-        for (int i = 0; i < text.length(); i++) {
-            analysisResult.put(text.charAt(i), analysisResult.getOrDefault(text.charAt(i), 0) + 1);
+        for (Character currentChar : text.toCharArray()) {
+            analysisResult.put(currentChar, analysisResult.getOrDefault(currentChar, 0) + 1);
         }
 
-        Long timerEnd = System.nanoTime();
+        long timerEnd = System.nanoTime();
         Double duration = roundToFour((double) (timerEnd - timerStart) / 1000000);
 
         return new TextAnalyzer(
@@ -41,12 +48,5 @@ public class TextAnalyzerRepository {
                 analysisResult,
                 duration
         );
-    }
-
-    private static double roundToFour(double doubleValue) {
-        // Using BigDecimal(String) constructor for preventing issues with inexact values
-        BigDecimal bigDecimalValue = new BigDecimal(Double.toString(doubleValue));
-        bigDecimalValue = bigDecimalValue.setScale(4, RoundingMode.HALF_UP);
-        return bigDecimalValue.doubleValue();
     }
 }
