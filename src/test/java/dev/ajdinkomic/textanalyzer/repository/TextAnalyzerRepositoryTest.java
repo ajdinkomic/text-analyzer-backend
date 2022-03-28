@@ -12,7 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TextAnalyzerRepositoryTest {
 
-    private TextAnalyzerRepository repository = new TextAnalyzerRepository();
+    private final TextAnalyzerRepository repository;
+
+    TextAnalyzerRepositoryTest() {
+        repository = new TextAnalyzerRepository();
+    }
 
     @Test
     void shouldAnalyzeForVowels() {
