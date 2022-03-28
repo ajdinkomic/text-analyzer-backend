@@ -23,14 +23,14 @@ class TextAnalyzerRepositoryTest {
 
         TextAnalyzer actualTextAnalyzer = repository.analyzeText(userInput);
         assertNotNull(actualTextAnalyzer);
-        assertEquals(actualTextAnalyzer.userInput(), userInput);
+        assertEquals(userInput, actualTextAnalyzer.userInput());
 
         HashMap<Character, Integer> expectedAnalysisResult = new HashMap<>();
         expectedAnalysisResult.put('a', 3);
         expectedAnalysisResult.put('e', 5);
         expectedAnalysisResult.put('o', 2);
 
-        assertEquals(actualTextAnalyzer.analysisResult(), expectedAnalysisResult);
+        assertEquals(expectedAnalysisResult, actualTextAnalyzer.analysisResult());
     }
 
     @Test
@@ -42,7 +42,7 @@ class TextAnalyzerRepositoryTest {
 
         TextAnalyzer actualTextAnalyzer = repository.analyzeText(userInput);
         assertNotNull(actualTextAnalyzer);
-        assertEquals(actualTextAnalyzer.userInput(), userInput);
+        assertEquals(userInput, actualTextAnalyzer.userInput());
 
         HashMap<Character, Integer> expectedAnalysisResult = new HashMap<>();
         expectedAnalysisResult.put('r', 1);
@@ -57,7 +57,7 @@ class TextAnalyzerRepositoryTest {
         expectedAnalysisResult.put('y', 1);
         expectedAnalysisResult.put('z', 1);
 
-        assertEquals(actualTextAnalyzer.analysisResult(), expectedAnalysisResult);
+        assertEquals(expectedAnalysisResult, actualTextAnalyzer.analysisResult());
     }
 
     @Test
@@ -123,7 +123,9 @@ class TextAnalyzerRepositoryTest {
         );
 
         TextAnalyzer actualTextAnalyzer = repository.analyzeText(userInput);
-        assertNull(actualTextAnalyzer);
+        assertNotNull(actualTextAnalyzer);
+        assertEquals(userInput, actualTextAnalyzer.userInput());
+        assertEquals(0, actualTextAnalyzer.analysisResult().size());
     }
 
     @Test
@@ -134,6 +136,8 @@ class TextAnalyzerRepositoryTest {
         );
 
         TextAnalyzer actualTextAnalyzer = repository.analyzeText(userInput);
-        assertNull(actualTextAnalyzer);
+        assertNotNull(actualTextAnalyzer);
+        assertEquals(userInput, actualTextAnalyzer.userInput());
+        assertEquals(0, actualTextAnalyzer.analysisResult().size());
     }
 }
