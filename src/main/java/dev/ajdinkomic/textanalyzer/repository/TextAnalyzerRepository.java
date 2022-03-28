@@ -15,7 +15,7 @@ public class TextAnalyzerRepository {
 
     public TextAnalyzer analyzeText(UserInput userInput) {
         // Return null if text or parameter is incorrect
-        if (userInput.text() == null || userInput.text().isBlank() ||
+        if (userInput == null || userInput.text() == null || userInput.text().isBlank() || userInput.parameter() == null ||
                 (userInput.parameter() != AnalysisParameterEnum.VOWELS && userInput.parameter() != AnalysisParameterEnum.CONSONANTS)) {
             return null;
         }
@@ -34,7 +34,7 @@ public class TextAnalyzerRepository {
             text = text.replaceAll("[aeiou]+", "");
         }
 
-        // Store analysis result to HashMap by iterating
+        // Store analysis result to HashMap by iterating over text
         HashMap<Character, Integer> analysisResult = new HashMap<>();
 
         for (Character currentChar : text.toCharArray()) {
